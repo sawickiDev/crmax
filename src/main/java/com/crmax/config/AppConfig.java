@@ -6,9 +6,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -20,6 +23,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "com.crmax.persistence", entityManagerFactoryRef = "entityManager")
 @ComponentScan(basePackages = "com.crmax")
 public class AppConfig {
 
@@ -37,15 +41,19 @@ public class AppConfig {
         return viewResolver;
     }
 
-    @Bean
-    public LocalSessionFactoryBean sessionFactoryBean() {
-        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+    @Bean(name = "entityManager")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
+                new LocalContainerEntityManagerFactoryBean();
 
-        sessionFactoryBean.setDataSource(myDataSource());
-        sessionFactoryBean.setPackagesToScan(new String[] {"com.crmax.persistence.model"});
-        sessionFactoryBean.setHibernateProperties(getHibernateProperties());
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
-        return sessionFactoryBean;
+        entityManagerFactoryBean.setDataSource(myDataSource());
+        entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
+        entityManagerFactoryBean.setPackagesToScan(new String[] {"com.crmax.persistence.model"});
+        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
+
+        return entityManagerFactoryBean;
     }
 
     @Bean
@@ -60,16 +68,16 @@ public class AppConfig {
         return dataSource;
     }
 
-    @Bean
-    @Autowired
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager
-                = new HibernateTransactionManager();
-
-        transactionManager.setSessionFactory(sessionFactory);
-
-        return transactionManager;
-    }
+//    @Bean
+//    @Autowired
+//    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+//        HibernateTransactionManager transactionManager
+//                = new HibernateTransactionManager();
+//
+//        transactionManager.setSessionFactory(sessionFactory);
+//
+//        return transactionManager;
+//    }
 
     @Bean
     public Properties getHibernateProperties() {
@@ -77,6 +85,7 @@ public class AppConfig {
 
         properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
         properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.implicit_naming_strategy", "org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl");
 
         return properties;
     }

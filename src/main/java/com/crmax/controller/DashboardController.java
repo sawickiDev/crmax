@@ -12,16 +12,8 @@ import java.util.List;
 @Controller
 public class DashboardController {
 
-    @Autowired
-    private UserDao userDao;
-
     @GetMapping(value = "/dashboard")
     public String showDashboard(Model model){
-
-        List<User> users = userDao.getUsers();
-
-        model.addAttribute("users", users);
-
         return "home";
     }
 

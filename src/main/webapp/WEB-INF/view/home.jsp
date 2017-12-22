@@ -8,9 +8,5 @@
 
     <h1>Hello CRMAX</h1>
 
-    <c:forEach var="item" items="${users}">
-        <p>${item.firstName}</p>
-    </c:forEach>
-
 </body>
 </html>
