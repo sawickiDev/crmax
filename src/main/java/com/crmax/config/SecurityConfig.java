@@ -35,12 +35,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
             .authorizeRequests()
-            .anyRequest().authenticated()
+            .antMatchers("/resources/img/*.jpeg")
+            .permitAll();
+
+        http
+            .authorizeRequests()
+                .anyRequest().authenticated()
             .and()
             .formLogin()
-            .defaultSuccessUrl("/dashboard", true);
+                .loginPage("/crmax-login")
+                .loginProcessingUrl("/crmax-auth")
+                .permitAll()
+                .defaultSuccessUrl("/dashboard", true);
     }
 
 }

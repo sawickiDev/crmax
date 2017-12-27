@@ -14,7 +14,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
@@ -25,7 +25,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.crmax.persistence", entityManagerFactoryRef = "entityManager")
 @ComponentScan(basePackages = "com.crmax")
-public class AppConfig {
+public class AppConfig implements WebMvcConfigurer{
 
     @Autowired
     private Environment environment;
@@ -39,6 +39,21 @@ public class AppConfig {
         viewResolver.setSuffix(".jsp");
 
         return viewResolver;
+    }
+
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("resources/css/**")
+                .addResourceLocations("/WEB-INF/resources/css/");
+        registry
+                .addResourceHandler("resources/img/**")
+                .addResourceLocations("/WEB-INF/resources/img/");
+        registry
+                .addResourceHandler("resources/js/**")
+                .addResourceLocations("/WEB-INF/resources/js/");
+        registry
+                .addResourceHandler("resources/css/**")
+                .addResourceLocations("/WEB-INF/resources/css/");
     }
 
     @Bean(name = "entityManager")
@@ -68,16 +83,6 @@ public class AppConfig {
         return dataSource;
     }
 
-//    @Bean
-//    @Autowired
-//    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-//        HibernateTransactionManager transactionManager
-//                = new HibernateTransactionManager();
-//
-//        transactionManager.setSessionFactory(sessionFactory);
-//
-//        return transactionManager;
-//    }
 
     @Bean
     public Properties getHibernateProperties() {
@@ -89,5 +94,4 @@ public class AppConfig {
 
         return properties;
     }
-
 }
