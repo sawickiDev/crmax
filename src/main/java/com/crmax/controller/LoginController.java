@@ -9,7 +9,7 @@ public class LoginController {
     @GetMapping("/crmax-login")
     public String showLoginPage(){
 
-        return "fancy-login";
+        return "crmax-login";
     }
 
 }

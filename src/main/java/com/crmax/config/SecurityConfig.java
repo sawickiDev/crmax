@@ -38,7 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             .authorizeRequests()
-            .antMatchers("/resources/img/*.jpeg")
+            .antMatchers("/resources/img/crmax-background.jpeg",
+                         "/resources/css/login-style.css",
+                         "/webjars/**")
             .permitAll();
 
         http

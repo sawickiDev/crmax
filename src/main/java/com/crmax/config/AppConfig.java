@@ -54,6 +54,9 @@ public class AppConfig implements WebMvcConfigurer{
         registry
                 .addResourceHandler("resources/css/**")
                 .addResourceLocations("/WEB-INF/resources/css/");
+        registry
+                .addResourceHandler("/webjars/**")
+                .addResourceLocations("/webjars/");
     }
 
     @Bean(name = "entityManager")
