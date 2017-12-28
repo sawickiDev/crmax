@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/crmax-login")
                 .loginProcessingUrl("/crmax-auth")
                 .permitAll()
-                .defaultSuccessUrl("/dashboard", true);
+                .defaultSuccessUrl("/crmax-dashboard", true);
     }
 
 }

@@ -12,9 +12,9 @@ import java.util.List;
 @Controller
 public class DashboardController {
 
-    @GetMapping(value = "/dashboard")
+    @GetMapping(value = "/crmax-dashboard")
     public String showDashboard(Model model){
-        return "home";
+        return "crmax-dashboard";
     }
 
 }
