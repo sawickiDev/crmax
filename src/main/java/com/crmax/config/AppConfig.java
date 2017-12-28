@@ -22,13 +22,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.crmax.persistence", entityManagerFactoryRef = "entityManager")
 @ComponentScan(basePackages = "com.crmax")
 public class AppConfig implements WebMvcConfigurer{
-
-    @Autowired
-    private Environment environment;
 
     @Bean
     public ViewResolver viewResolver() {
@@ -57,44 +52,5 @@ public class AppConfig implements WebMvcConfigurer{
         registry
                 .addResourceHandler("/webjars/**")
                 .addResourceLocations("/webjars/");
-    }
-
-    @Bean(name = "entityManager")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
-                new LocalContainerEntityManagerFactoryBean();
-
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-
-        entityManagerFactoryBean.setDataSource(myDataSource());
-        entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
-        entityManagerFactoryBean.setPackagesToScan(new String[] {"com.crmax.persistence.model"});
-        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
-
-        return entityManagerFactoryBean;
-    }
-
-    @Bean
-    public DataSource myDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-        dataSource.setUsername("steveq");
-        dataSource.setPassword("steveq");
-
-        return dataSource;
-    }
-
-
-    @Bean
-    public Properties getHibernateProperties() {
-        Properties properties = new Properties();
-
-        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
-        properties.put("hibernate.show_sql", "true");
-        properties.put("hibernate.implicit_naming_strategy", "org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl");
-
-        return properties;
     }
 }
