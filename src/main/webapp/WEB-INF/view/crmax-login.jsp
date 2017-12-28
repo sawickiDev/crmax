@@ -17,14 +17,55 @@
 
     <body>
 
-        <div class="container slds-large-size--6-of-12">
-            <div class="slds-grid slds-wrap">
-                <div class="slds-large-size--12-of-12">
-                    <label for="username-input"/>
-                    <input id="username-input" type="text" name="username"/>
-                </div>
+    <hr><hr>
+    <form:form action="${pageContext.request.contextPath}/crmax-auth"
+               method="POST">
+        <div class="slds-grid slds-wrap slds-align_absolute-center form-container">
+
+            <div class="slds-grid slds-wrap slds-align_absolute-center login-form
+                        slds-large-size--3-of-12
+                        slds-medium-size--5-of-12
+                        slds-small-size--7-of-12
+                        slds-max-small-size--9-of-12
+                        slds-p-around_large">
+
+                    <div class="slds-size--12-of-12 slds-m-bottom_x-small">
+                        <label for="username-input"/>
+                        <input id="username-input"
+                               class="slds-input cr-input"
+                               type="text"
+                               name="username"
+                               placeholder="Username"/>
+                    </div>
+                    <div class="slds-size--12-of-12 slds-m-top_x-small">
+                        <label for="password-input"/>
+                        <input id="password-input"
+                               class="slds-input
+                           cr-input"
+                               type="password"
+                               placeholder="Password"
+                               name="password"/>
+                    </div>
+                    <div class="slds-large-size--6-of-12
+                                slds-medium-size--6-of-12
+                                slds-small-size--12-of-12
+                                slds-max-small-size--12-of-12
+                                slds-m-top_medium
+                                slds-p-around_x-small">
+                        <button type="button" class="slds-button left-button">Sign up</button>
+                    </div>
+                    <div class="slds-large-size--6-of-12
+                                slds-medium-size--6-of-12
+                                slds-small-size--12-of-12
+                                slds-max-small-size--12-of-12
+                                slds-m-top_medium
+                                slds-p-around_x-small">
+                        <button type="submit" class="slds-button right-button">Sign in</button>
+                    </div>
+
             </div>
         </div>
 
+    </form:form>
     </body>
 </html>
