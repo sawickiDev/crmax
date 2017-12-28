@@ -57,3 +57,13 @@ html body {
     border: 0;
     border-radius: 0;
 }
+
+.warning-box {
+    background-color: rgba(224, 138, 138, 0.25882352941176473);
+    border-color: #8c4d4d;
+    border-radius: 0;
+    text-align: center;
+    font-family: Ubuntu;
+    font-size: 14;
+    color: #8c4d4d;
+}

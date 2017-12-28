@@ -1,6 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.ResourceBundle" %>
+<% ResourceBundle resource = ResourceBundle.getBundle("labels");
+    String username = resource.getString("login.username");
+    String password = resource.getString("login.password");
+    String error = resource.getString("login.error"); %>
 
 <html>
     <head>
@@ -17,7 +22,6 @@
 
     <body>
 
-    <hr><hr>
     <form:form action="${pageContext.request.contextPath}/crmax-auth"
                method="POST">
         <div class="slds-grid slds-wrap slds-align_absolute-center form-container">
@@ -29,23 +33,33 @@
                         slds-max-small-size--9-of-12
                         slds-p-around_large">
 
-                    <div class="slds-size--12-of-12 slds-m-bottom_x-small">
+                    <div class="slds-size--12-of-12
+                                slds-m-bottom_x-small">
                         <label for="username-input"/>
                         <input id="username-input"
                                class="slds-input cr-input"
                                type="text"
                                name="username"
-                               placeholder="Username"/>
+                               placeholder="<%=username%>"/>
                     </div>
-                    <div class="slds-size--12-of-12 slds-m-top_x-small">
+                    <div class="slds-size--12-of-12
+                                slds-m-top_x-small">
                         <label for="password-input"/>
                         <input id="password-input"
                                class="slds-input
                            cr-input"
                                type="password"
-                               placeholder="Password"
+                               placeholder="<%=password%>"
                                name="password"/>
                     </div>
+                    <c:if test="${param.error != null}">
+                        <div class="slds-box
+                                    warning-box
+                                    slds-size--12-of-12
+                                    slds-m-top_medium">
+                            <p><%=error%></p>
+                        </div>
+                    </c:if>
                     <div class="slds-large-size--6-of-12
                                 slds-medium-size--6-of-12
                                 slds-small-size--12-of-12
