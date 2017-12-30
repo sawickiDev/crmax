@@ -6,6 +6,14 @@ import com.crmax.persistence.model.User;
 import java.util.List;
 
 public interface ContactService {
-    Contact save(Contact contact);
+    String save(Contact contact);
     List<Contact> findByUser(User user);
+    List<Contact> findByEmailAndPhone(Contact contact);
+    Boolean isDuplicate(Contact contact);
+
+    public enum InsertionStatus {
+        WARNING,
+        ERROR,
+        SUCCESS
+    }
 }

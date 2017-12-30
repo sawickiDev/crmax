@@ -4,6 +4,7 @@ import com.crmax.persistence.dao.ContactDao;
 import com.crmax.persistence.model.Contact;
 import com.crmax.persistence.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,12 +17,45 @@ public class ContactServiceImpl implements ContactService{
     @Autowired
     private ContactDao contactDao;
 
+    @Autowired
+    private UserService userService;
+
     @Transactional
-    public Contact save(Contact contact) {
-        return contactDao.save(contact);
+    public String save(Contact contact) {
+
+        Contact persistedContact;
+
+        try{
+            contact.setOwnerId(userService.getCurrentlyLoggedUser());
+            persistedContact = contactDao.save(contact);
+        } catch(DataIntegrityViolationException dvex) {
+            return InsertionStatus.ERROR.name();
+        }
+
+        return resolveInsertionStatus(persistedContact);
     }
 
     public List<Contact> findByUser(User user) {
+
         return contactDao.findByOwnerId(user);
+    }
+
+    public List<Contact> findByEmailAndPhone(Contact contact) {
+        System.out.println(contactDao.findByEmailOrPhone(contact.getEmail(), contact.getPhone()));
+        return contactDao.findByEmailOrPhone(contact.getEmail(), contact.getPhone());
+    }
+
+    private String resolveInsertionStatus(Contact persistedContact){
+
+        if(persistedContact != null)
+            return InsertionStatus.SUCCESS.name();
+        else
+            return InsertionStatus.ERROR.name();
+
+    }
+
+    public Boolean isDuplicate(Contact contact){
+
+        return findByEmailAndPhone(contact).size() > 0;
     }
 }

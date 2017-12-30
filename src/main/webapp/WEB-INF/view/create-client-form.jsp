@@ -10,7 +10,10 @@
     String email = resource.getString("create_form.email");
     String phone = resource.getString("create_form.phone");
     String companyName = resource.getString("create_form.company_name");
-    String dashboard = resource.getString("create_form.dashboard");%>
+    String dashboard = resource.getString("create_form.dashboard");
+    String success = resource.getString("create_form.success");
+    String warning = resource.getString("create_form.warning");
+    String error = resource.getString("create_form.error");%>
 <html>
 <head>
     <title>CRMax Dashboard</title>
@@ -50,13 +53,39 @@
                method="POST"
                modelAttribute="client">
         <div class="slds-grid slds-wrap slds-align_absolute-center form-container">
-
             <div class="slds-grid slds-wrap slds-align_absolute-center login-form
                         slds-large-size--3-of-12
                         slds-medium-size--5-of-12
                         slds-small-size--7-of-12
                         slds-max-small-size--9-of-12
                         slds-p-around_large">
+
+                <c:choose>
+                    <c:when test="${status == 'SUCCESS'}">
+                        <div class="slds-box
+                                    success-box
+                                    slds-size--12-of-12
+                                    slds-m-bottom_medium">
+                            <p><%=success%></p>
+                        </div>
+                    </c:when>
+                    <c:when test="${status == 'WARNING'}">
+                        <div class="slds-box
+                                    warning-box
+                                    slds-size--12-of-12
+                                    slds-m-bottom_medium">
+                            <p><%=warning%></p>
+                        </div>
+                    </c:when>
+                    <c:when test="${status == 'ERROR'}">
+                        <div class="slds-box
+                                    error-box
+                                    slds-size--12-of-12
+                                    slds-m-bottom_medium">
+                            <p><%=error%></p>
+                        </div>
+                    </c:when>
+                </c:choose>
 
                 <div class="slds-size--12-of-12
                                     slds-m-bottom_x-small">

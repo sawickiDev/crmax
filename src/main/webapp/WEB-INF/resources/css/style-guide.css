@@ -94,3 +94,33 @@ html body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.success-box {
+    background-color: rgba(133, 239, 62, 0.25);
+    border-color: #35b732;
+    border-radius: 0;
+    text-align: center;
+    font-family: Ubuntu;
+    font-size: 14;
+    color: #04844b;
+}
+
+.warning-box {
+    background-color: rgba(255, 205, 68, 0.25);
+    border-color: #ffbc42;
+    border-radius: 0;
+    text-align: center;
+    font-family: Ubuntu;
+    font-size: 14;
+    color: #8c4d4d;
+}
+
+.error-box {
+    background-color: rgba(224, 138, 138, 0.25882352941176473);
+    border-color: #8c4d4d;
+    border-radius: 0;
+    text-align: center;
+    font-family: Ubuntu;
+    font-size: 14;
+    color: #8c4d4d;
+}

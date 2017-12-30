@@ -55,7 +55,7 @@
                     </div>
                     <c:if test="${param.error != null}">
                         <div class="slds-box
-                                    warning-box
+                                    error-box
                                     slds-size--12-of-12
                                     slds-m-top_medium">
                             <p><%=error%></p>
