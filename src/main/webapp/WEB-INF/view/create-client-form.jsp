@@ -43,7 +43,7 @@
                             slds-medium-size--1-of-12
                             slds-small-size--2-of-12
                             slds-max-small-size--3-of-12">
-            <a  href="/create-client"
+            <a  href="/crmax-dashboard"
                 class="slds-button right-button"><%=dashboard%></a>
         </div>
 
@@ -90,42 +90,50 @@
                 <div class="slds-size--12-of-12
                                     slds-m-bottom_x-small">
                     <label class="cr-label" for="first-name-input"><%=firstName%></label>
-                    <input id="first-name-input"
+                    <form:input id="first-name-input"
                            class="slds-input cr-input"
                            type="text"
-                           name="firstName"/>
+                           path="firstName"
+                           required="true"/>
+                    <form:errors path="firstName" cssClass="error-box-validation"/>
                 </div>
                 <div class="slds-size--12-of-12
                                     slds-m-top_x-small">
                     <label class="cr-label" for="last-name-input"><%=lastName%></label>
-                    <input id="last-name-input"
+                    <form:input id="last-name-input"
                            class="slds-input cr-input"
                            type="text"
-                           name="lastName"/>
+                           path="lastName"
+                           required="true"/>
+                    <form:errors path="lastName" cssClass="error-box-validation"/>
                 </div>
                 <div class="slds-size--12-of-12
                                     slds-m-top_x-small">
                     <label class="cr-label" for="email-input"><%=email%></label>
-                    <input id="email-input"
+                    <form:input id="email-input"
                            class="slds-input cr-input"
                            type="email"
-                           name="email"/>
+                           path="email"
+                           required="true"/>
+                    <form:errors path="email" cssClass="error-box-validation"/>
                 </div>
                 <div class="slds-size--12-of-12
                                     slds-m-top_x-small">
                     <label class="cr-label" for="phone-input"><%=phone%></label>
-                    <input id="phone-input"
+                    <form:input id="phone-input"
                            class="slds-input cr-input"
-                           type="text"
-                           name="phone"/>
+                           type="number"
+                           path="phone"/>
+                    <form:errors path="phone" cssClass="error-box-validation"/>
                 </div>
                 <div class="slds-size--12-of-12
                                     slds-m-top_x-small">
                     <label class="cr-label" for="company-name-input"><%=companyName%></label>
-                    <input id="company-name-input"
+                    <form:input id="company-name-input"
                            class="slds-input cr-input"
                            type="text"
-                           name="companyName"/>
+                           path="companyName"/>
+                    <form:errors path="companyName" cssClass="error-box-validation"/>
                 </div>
 
                 <div class="slds-size--6-of-12

@@ -1,6 +1,10 @@
 package com.crmax.persistence.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "contacts_table")
@@ -11,18 +15,26 @@ public class Contact {
     @Column(name = "id")
     private Integer id;
 
+    @NotEmpty(message = "First Name is required")
+    @Size(max = 30, message = "First Name is too long")
     @Column(name = "first_name")
     private String firstName;
 
+    @NotEmpty(message = "Last name is required")
+    @Size(max = 30, message = "Last Name is too long")
     @Column(name = "last_name")
     private String lastName;
 
+    @NotEmpty(message = "Email is required")
+    @Email(message = "Provide Email in valid format")
     @Column(name = "email")
     private String email;
 
+    @Size(max = 20, message = "Phone is too long")
     @Column(name = "phone")
     private String phone;
 
+    @Size(max = 30, message = "Company Name is too long")
     @Column(name = "company_name")
     private String companyName;
 

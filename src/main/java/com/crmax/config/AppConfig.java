@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -52,5 +53,10 @@ public class AppConfig implements WebMvcConfigurer{
         registry
                 .addResourceHandler("/webjars/**")
                 .addResourceLocations("/webjars/");
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validatorFactoryBean(){
+        return new LocalValidatorFactoryBean();
     }
 }

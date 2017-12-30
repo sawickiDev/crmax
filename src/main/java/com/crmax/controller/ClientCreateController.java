@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
+
 @Controller
 public class ClientCreateController {
 
@@ -26,19 +28,29 @@ public class ClientCreateController {
     private UserService userService;
 
     @GetMapping(value = "/create-client")
-    public ModelAndView showCreateClientForm(@ModelAttribute("status") String status,
-                                            ModelAndView modelAndView){
-        modelAndView.addObject("status", status);
-        modelAndView.addObject("client", new Contact());
-        modelAndView.setViewName("create-client-form");
+    public String showCreateClientForm(@ModelAttribute("status") String status,
+                                            Model model){
 
-        return modelAndView;
+        System.out.println(model.asMap().get("client"));
+        if(!model.containsAttribute("client")){
+            model.addAttribute("client", new Contact());
+        }
+
+        model.addAttribute("status", status);
+
+        return "create-client-form";
     }
 
     @PostMapping(value = "/save-client")
-    public RedirectView saveClient(@ModelAttribute("client")Contact contact,
-                                   BindingResult result,
+    public RedirectView saveClient(@Valid @ModelAttribute("client")Contact contact,
+                                   BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes){
+
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("client", contact);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.client", bindingResult);
+            return new RedirectView("create-client");
+        }
 
         if(!contactService.isDuplicate(contact)){
             redirectAttributes.addFlashAttribute("status", contactService.save(contact));
