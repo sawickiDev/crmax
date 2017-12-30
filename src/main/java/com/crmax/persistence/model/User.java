@@ -52,6 +52,11 @@ public class User implements UserDetails{
     @JoinColumn(name = "password_id")
     private Password passwordId;
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+                CascadeType.DETACH, CascadeType.REFRESH},
+                mappedBy = "ownerId")
+    private List<Contact> contacts;
+
     public User() {
     }
 
@@ -146,6 +151,18 @@ public class User implements UserDetails{
         this.passwordId = passwordId;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
     public void addAdminUser(User subordinate) {
 
         if(subordinates == null)
@@ -155,6 +172,15 @@ public class User implements UserDetails{
 
         subordinate.setSupervisor(this);
 
+    }
+
+    public void addContact(Contact contact) {
+        if(contacts == null)
+            contacts = new ArrayList<Contact>();
+        else
+            contacts.add(contact);
+
+        contact.setOwnerId(this);
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
