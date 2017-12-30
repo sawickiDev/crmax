@@ -40,7 +40,8 @@ public class User implements UserDetails{
 
     @OneToMany(mappedBy = "supervisor",
                 cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                        CascadeType.DETACH, CascadeType.REFRESH})
+                        CascadeType.DETACH, CascadeType.REFRESH},
+                fetch = FetchType.EAGER)
     private List<User> subordinates;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,

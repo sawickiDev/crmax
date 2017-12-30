@@ -46,8 +46,9 @@
 
     </div>
 
-    <form:form action="${pageContext.request.contextPath}/crmax-auth"
-               method="POST">
+    <form:form action="${pageContext.request.contextPath}/save-client"
+               method="POST"
+               modelAttribute="client">
         <div class="slds-grid slds-wrap slds-align_absolute-center form-container">
 
             <div class="slds-grid slds-wrap slds-align_absolute-center login-form
@@ -101,7 +102,7 @@
                 <div class="slds-size--6-of-12
                             slds-m-top_medium
                             slds-p-around_x-small">
-                    <button type="button" class="slds-button neutral-button"><%=cancel%></button>
+                    <a href="/crmax-dashboard" class="slds-button neutral-button"><%=cancel%></a>
                 </div>
                 <div class="slds-size--6-of-12
                             slds-m-top_medium
