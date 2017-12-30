@@ -9,7 +9,8 @@
     String lastName = resource.getString("create_form.last_name");
     String email = resource.getString("create_form.email");
     String phone = resource.getString("create_form.phone");
-    String companyName = resource.getString("create_form.company_name");%>
+    String companyName = resource.getString("create_form.company_name");
+    String dashboard = resource.getString("create_form.dashboard");%>
 <html>
 <head>
     <title>CRMax Dashboard</title>
@@ -21,14 +22,41 @@
           href="/webjars/salesforce-lightning-design-system/2.4.1/assets/styles/salesforce-lightning-design-system.min.css"/>
 
     <link rel="stylesheet" type="text/css" href="/resources/css/create-client-form-style.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/style-guide.css"/>
 </head>
 <body>
-    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
-        <div class="slds-modal__container">
-            <header class="slds-modal__header contact-form-header">
-                <h2 class="slds-text-heading_medium slds-hyphenate">Create Client</h2>
-            </header>
-            <div class="slds-grid slds-wrap slds-modal__content slds-p-around_medium">
+
+    <div class="slds-page-header
+                dashboard-header
+                slds-grid">
+
+        <div class="logo-type">
+            CRMax
+        </div>
+
+        <input type="hidden" name="create-client" value="true"/>
+        <div class="slds-col_bump-left
+                            slds-large-size--1-of-12
+                            slds-medium-size--1-of-12
+                            slds-small-size--2-of-12
+                            slds-max-small-size--3-of-12">
+            <a  href="/create-client"
+                class="slds-button right-button"><%=dashboard%></a>
+        </div>
+
+    </div>
+
+    <form:form action="${pageContext.request.contextPath}/crmax-auth"
+               method="POST">
+        <div class="slds-grid slds-wrap slds-align_absolute-center form-container">
+
+            <div class="slds-grid slds-wrap slds-align_absolute-center login-form
+                        slds-large-size--3-of-12
+                        slds-medium-size--5-of-12
+                        slds-small-size--7-of-12
+                        slds-max-small-size--9-of-12
+                        slds-p-around_large">
+
                 <div class="slds-size--12-of-12
                                     slds-m-bottom_x-small">
                     <label class="cr-label" for="first-name-input"><%=firstName%></label>
@@ -69,13 +97,22 @@
                            type="text"
                            name="companyName"/>
                 </div>
+
+                <div class="slds-size--6-of-12
+                            slds-m-top_medium
+                            slds-p-around_x-small">
+                    <button type="button" class="slds-button neutral-button"><%=cancel%></button>
+                </div>
+                <div class="slds-size--6-of-12
+                            slds-m-top_medium
+                            slds-p-around_x-small">
+                    <button type="submit" class="slds-button right-button"><%=create%></button>
+                </div>
+
             </div>
-            <footer class="slds-modal__footer contact-form-footer">
-                <button class="slds-button slds-button_neutral"><%=cancel%></button>
-                <button class="slds-button slds-button_brand"><%=create%></button>
-            </footer>
         </div>
-    </section>
-    <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </form:form>
+
 </body>
 </html>

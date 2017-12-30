@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/resources/img/crmax-background.jpeg",
                          "/resources/css/login-style.css",
+                         "/resources/css/style-guide.css",
                          "/webjars/**")
             .permitAll();
 

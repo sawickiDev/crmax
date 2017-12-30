@@ -18,6 +18,7 @@
               href="/webjars/salesforce-lightning-design-system/2.4.1/assets/styles/salesforce-lightning-design-system.min.css"/>
 
         <link rel="stylesheet" type="text/css" href="/resources/css/login-style.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/style-guide.css"/>
     </head>
 
     <body>

@@ -11,20 +11,3 @@
     border-radius: 0;
     background-color: #ffffff
 }
-
-.cr-input {
-    background-color: #ffffff;
-    font-family: Ubuntu;
-    border: none;
-    border-bottom: solid;
-    border-width: 1px;
-    border-color: #2d9cdb;
-    border-radius: 0;
-    font-family: Ubuntu;
-    font-size: 14px;
-}
-
-.cr-label {
-    font-size: 14px;
-    font-family: Ubuntu;
-}

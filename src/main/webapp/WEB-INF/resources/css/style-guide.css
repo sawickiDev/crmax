@@ -1,0 +1,96 @@
+html body {
+    background: url("/resources/img/crmax-background.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.cr-input {
+    background-color: rgb(199, 199, 199);
+    font-family: Ubuntu;
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #2d9cdb;
+    border-radius: 0;
+    font-family: Ubuntu;
+    font-size: 14px;
+}
+
+.cr-input:focus {
+    background-color: rgb(199, 199, 199);
+    font-family: Ubuntu;
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #2d9cdb;
+    border-radius: 0;
+    font-family: Ubuntu;
+    font-size: 14px;
+}
+
+::-webkit-input-placeholder {
+    color: rgb(171, 171, 171);
+    font-family: Ubuntu;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 4px;
+}
+
+.cr-label {
+    font-size: 14px;
+    font-family: Ubuntu;
+}
+
+.left-button {
+    background: linear-gradient(to right, #f2994a 0%, #2d9cdb 100%);
+    color: #fff;
+    opacity: 0.7;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+}
+
+.neutral-button {
+    background-color: #fff;
+    color: #2d9cdb;
+    opacity: 0.7;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+}
+
+.right-button {
+    background: linear-gradient(to left, #f2994a 0%, #2d9cdb 100%);
+    color: #fff;
+    opacity: 0.7;
+    width: 100%;
+    text-transfrom: uppercase;
+    border: 0;
+    border-radius: 0;
+}
+
+.form-container {
+    height: 100%;
+}
+
+.login-form {
+    background-color: rgba(171, 171, 171, 0.75);
+}
+
+.dashboard-header {
+    background-color: rgba(222, 222, 222, 0.95);
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 4px;
+}
+
+.logo-type {
+    background: linear-gradient(to right, #f2994a 0%, #2d9cdb 100%);
+    font-size: 18px;
+    font-family: Ubuntu;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
