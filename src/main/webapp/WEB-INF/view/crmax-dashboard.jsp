@@ -6,6 +6,7 @@
 <%
     ResourceBundle resource = ResourceBundle.getBundle("labels");
     String create = resource.getString("dashboard.create");
+    String emptyList = resource.getString("dashboard.emptyList");
 %>
 
 <html>
@@ -52,32 +53,42 @@
                         slds-medium-size--8-of-12
                         slds-small-size--12-of-12
                         slds-max-small-size--12-of-12">
-                <div class="slds-box
+                <c:if test="${contacts.size() == 0}">
+                    <div class="slds-size--6-of-12 empty-prompt slds-align_absolute-center">
+                        <i class="material-icons">help</i>
+                        <p><%=emptyList%></p>
+                    </div>
+                </c:if>
+                <c:forEach var="contact" items="${contacts}">
+                    <div class="slds-box
                             slds-grid
                             slds-wrap
                             slds-align_absolute-center
                             list-item
-                            slds-m-top_medium">
-                    <div class="slds-large-size--1-of-12
+                            slds-m-top_medium
+                            slds-m-left_small
+                            slds-m-right_small">
+                        <div class="slds-large-size--1-of-12
                                 slds-medium-size--1-of-12
                                 slds-small-size--2-of-12
                                 slds-max-small-size--2-of-12">
-                        <i class="material-icons face-icon">face</i>
-                    </div>
-                    <div class="slds-grid slds-wrap slds-size--11-of-12">
-                        <div class="slds-size--1-of-2
+                            <i class="material-icons face-icon">face</i>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-size--11-of-12">
+                            <div class="slds-size--1-of-2
                                 slds-text-align_left">
-                            <p class="slds-truncate">Marek Wlodarek (Accenture)</p>
-                        </div>
-                        <div class="slds-size--1-of-2
+                                <p class="slds-truncate">${contact.firstName} ${contact.lastName} (${contact.companyName})</p>
+                            </div>
+                            <div class="slds-size--1-of-2
                                 slds-text-align_right">
-                            <p clas="slds-truncate">Value: 1000000 $</p>
-                        </div>
-                        <div class="slds-size--1-of-2">
-                            <p class="slds-truncate">Newly Created</p>
+                                <p clas="slds-truncate">Value: 1000000 $</p>
+                            </div>
+                            <div class="slds-size--1-of-2">
+                                <p class="slds-truncate">Newly Created</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
 
