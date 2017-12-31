@@ -1,0 +1,29 @@
+.scrollable-pane {
+}
+
+.scrollable-pane::-webkit-scrollbar {
+    width: 1em;
+}
+
+.scrollable-pane::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.scrollable-pane::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+.face-icon {
+    font-size: 48px;
+    color: #1589eead;
+}
+
+.list-item {
+    background-color: rgba(116, 187, 249, 0.48);
+    color: #16325c;
+    font-family: Ubuntu;
+    border-color: #1589ee;
+    font-size: 16px;
+    padding: 10px;
+}
