@@ -52,7 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/crmax-login")
                 .loginProcessingUrl("/crmax-auth")
                 .permitAll()
-                .defaultSuccessUrl("/crmax-dashboard", true);
+                .defaultSuccessUrl("/crmax-dashboard", true)
+            .and()
+            .logout()
+                .logoutUrl("/logout-page")
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/crmax-login");
     }
 
 }

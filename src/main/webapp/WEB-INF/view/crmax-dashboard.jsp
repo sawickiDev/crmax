@@ -7,6 +7,7 @@
     ResourceBundle resource = ResourceBundle.getBundle("labels");
     String create = resource.getString("dashboard.create");
     String emptyList = resource.getString("dashboard.emptyList");
+    String logout = resource.getString("dashboard.logout");
 %>
 
 <html>
@@ -35,7 +36,7 @@
             </div>
 
             <input type="hidden" name="create-client" value="true"/>
-            <div class="slds-col_bump-left
+            <div class="slds-align_absolute-center
                         slds-large-size--1-of-12
                         slds-medium-size--1-of-12
                         slds-small-size--2-of-12
@@ -43,6 +44,15 @@
                 <a  href="/create-client"
                     class="slds-button right-button"><%=create%></a>
             </div>
+            <form:form method="post"
+                       action="/logout-page"
+                       cssClass="slds-large-size--1-of-12
+                                    slds-medium-size--1-of-12
+                                    slds-small-size--2-of-12
+                                    slds-max-small-size--3-of-12"
+                       cssStyle="margin-bottom:0">
+                <button type="submit" class="slds-button neutral-button"><%=logout%></button>
+            </form:form>
 
         </div>
 
@@ -60,6 +70,7 @@
                     </div>
                 </c:if>
                 <c:forEach var="contact" items="${contacts}">
+
                     <div class="slds-box
                             slds-grid
                             slds-wrap
