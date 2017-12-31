@@ -8,6 +8,7 @@ import java.util.List;
 public interface ContactService {
     String save(Contact contact);
     List<Contact> findByUser(User user);
+    List<Contact> findByUsers(List<User> users);
     List<Contact> findByEmailAndPhone(Contact contact);
     Boolean isDuplicate(Contact contact);
 

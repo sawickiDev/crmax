@@ -24,10 +24,8 @@ public class DashboardController {
     @GetMapping(value = "/crmax-dashboard")
     public String showDashboard(Model model){
         List<Contact> contacts =
-                contactService.findByUser(userService.getCurrentlyLoggedUser());
-
-        System.out.println(contacts);
-
+                contactService.findByUsers(userService.getCurrentlyLoggedUserWithSubordinates());
+        
         model.addAttribute("contacts", contacts);
 
         return "crmax-dashboard";

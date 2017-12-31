@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -34,8 +37,20 @@ public class UserServiceImpl implements UserService{
     public User getCurrentlyLoggedUser() {
 
         String currentlyLoggedUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+
         User currentlyLoggedUser = (User)loadUserByUsername(currentlyLoggedUsername);
 
         return currentlyLoggedUser;
+    }
+
+    public List<User> getCurrentlyLoggedUserWithSubordinates() {
+
+        List<User> users = new ArrayList<User>();
+
+        User currenltyLogged = getCurrentlyLoggedUser();
+        users.add(currenltyLogged);
+        users.addAll(currenltyLogged.getSubordinates());
+
+        return users;
     }
 }

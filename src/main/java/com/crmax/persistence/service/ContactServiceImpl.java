@@ -40,6 +40,14 @@ public class ContactServiceImpl implements ContactService{
         return contactDao.findByOwnerId(user);
     }
 
+    public List<Contact> findByUsers(List<User> users) {
+
+        System.out.println("subs contacts");
+        System.out.println(contactDao.findByOwnerIdIsIn(users));
+
+        return contactDao.findByOwnerIdIsIn(users);
+    }
+
     public List<Contact> findByEmailAndPhone(Contact contact) {
         System.out.println(contactDao.findByEmailOrPhone(contact.getEmail(), contact.getPhone()));
         return contactDao.findByEmailOrPhone(contact.getEmail(), contact.getPhone());

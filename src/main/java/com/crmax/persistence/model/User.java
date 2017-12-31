@@ -230,8 +230,6 @@ public class User implements UserDetails{
                 ", email='" + email + '\'' +
                 ", userName='" + username + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", supervisor=" + supervisor +
-                ", subordinates=" + subordinates +
                 ", roleId=" + roleId +
                 ", passwordId=" + passwordId +
                 '}';
