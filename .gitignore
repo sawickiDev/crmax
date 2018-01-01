@@ -2,3 +2,5 @@
 /CRMax.iml
 /target
 src/main/resources/persistence.properties
+src/main/resources/persistence-deploy.properties
+Procfile
