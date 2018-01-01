@@ -1,3 +1,4 @@
 /.idea
 /CRMax.iml
 /target
+src/main/resources/persistence.properties
