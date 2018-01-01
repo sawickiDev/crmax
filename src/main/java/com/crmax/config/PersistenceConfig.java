@@ -20,7 +20,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.crmax.persistence", entityManagerFactoryRef = "entityManager")
-@PropertySource({"classpath:persistence-deploy.properties"})
+@PropertySource({"classpath:persistence.properties"})
 public class PersistenceConfig {
 
     @Autowired
