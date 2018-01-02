@@ -5,6 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "contacts_table")
@@ -41,6 +42,12 @@ public class Contact {
     @JoinColumn(name = "owner_id")
     @ManyToOne
     private User ownerId;
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+                CascadeType.DETACH, CascadeType.REFRESH},
+                mappedBy = "contactId")
+    private List<Interaction> interactions;
+
 
     public Contact() {
     }

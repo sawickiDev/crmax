@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table (name = "products_table")
@@ -27,6 +29,9 @@ public class Product {
     @Positive(message = "Price must be greater than 0")
     @Column(name = "price")
     private Double price;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Interaction> interactions = new ArrayList<>();
 
     public Product() {
     }
