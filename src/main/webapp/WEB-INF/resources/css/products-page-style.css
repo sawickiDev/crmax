@@ -1,0 +1,9 @@
+.list-item {
+    background-color: rgba(116, 187, 249, 0.48);
+    color: #16325c;
+    font-family: Ubuntu;
+    border-color: #1589ee;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 0;
+}

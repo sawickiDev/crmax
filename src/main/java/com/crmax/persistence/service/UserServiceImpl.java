@@ -38,6 +38,8 @@ public class UserServiceImpl implements UserService{
 
         String currentlyLoggedUsername = SecurityContextHolder.getContext().getAuthentication().getName();
 
+        System.out.println("authorities : " + SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+
         User currentlyLoggedUser = (User)loadUserByUsername(currentlyLoggedUsername);
 
         return currentlyLoggedUser;
