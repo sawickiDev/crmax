@@ -53,6 +53,11 @@ public class ContactServiceImpl implements ContactService{
         return contactDao.findByEmailOrPhone(contact.getEmail(), contact.getPhone());
     }
 
+    @Override
+    public Contact findByEmail(String email) {
+        return contactDao.findByEmail(email);
+    }
+
     private String resolveInsertionStatus(Contact persistedContact){
 
         if(persistedContact != null)

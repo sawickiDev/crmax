@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +20,13 @@ public class Interaction {
     @Column(name = "stage")
     private String stage;
 
-    @Column(name = "last_name")
-    private String startDate;
+    @Basic
+    @Column(name = "start_date")
+    private Date startDate;
 
-    @Column(name = "email")
-    private String lastDate;
-
-    @Size(max = 30, message = "Company Name is too long")
-    @Column(name = "company_name")
-    private String companyName;
+    @Basic
+    @Column(name = "end_date")
+    private Date endDate;
 
     @JoinColumn(name = "contact_id")
     @ManyToOne
@@ -43,11 +42,10 @@ public class Interaction {
     public Interaction() {
     }
 
-    public Interaction(String stage, String startDate, String lastDate, @Size(max = 30, message = "Company Name is too long") String companyName) {
+    public Interaction(String stage, Date startDate, Date endDate) {
         this.stage = stage;
         this.startDate = startDate;
-        this.lastDate = lastDate;
-        this.companyName = companyName;
+        this.endDate = endDate;
     }
 
     public Integer getId() {
@@ -66,28 +64,20 @@ public class Interaction {
         this.stage = stage;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getLastDate() {
-        return lastDate;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setLastDate(String lastDate) {
-        this.lastDate = lastDate;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setEndDate(Date lastDate) {
+        this.endDate = lastDate;
     }
 
     public Contact getContactId() {
@@ -104,8 +94,7 @@ public class Interaction {
                 "id=" + id +
                 ", stage='" + stage + '\'' +
                 ", startDate='" + startDate + '\'' +
-                ", lastDate='" + lastDate + '\'' +
-                ", companyName='" + companyName + '\'' +
+                ", lastDate='" + endDate + '\'' +
                 ", contactId=" + contactId +
                 '}';
     }

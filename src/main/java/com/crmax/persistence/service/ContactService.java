@@ -10,6 +10,7 @@ public interface ContactService {
     List<Contact> findByUser(User user);
     List<Contact> findByUsers(List<User> users);
     List<Contact> findByEmailAndPhone(Contact contact);
+    Contact findByEmail(String email);
     Boolean isDuplicate(Contact contact);
 
     public enum InsertionStatus {

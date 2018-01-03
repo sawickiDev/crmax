@@ -13,4 +13,5 @@ public interface ContactDao extends CrudRepository<Contact, Integer> {
     List<Contact> findByOwnerId(User user);
     List<Contact> findByEmailOrPhone(String email, String phone);
     List<Contact> findByOwnerIdIsIn(List<User> users);
+    Contact findByEmail(String email);
 }

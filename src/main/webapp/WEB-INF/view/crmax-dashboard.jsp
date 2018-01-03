@@ -101,8 +101,8 @@
                         </div>
                     </c:if>
                     <c:forEach var="contact" items="${contacts}">
-
-                        <div class="slds-box
+                        <a href="/client-detail-page?contact=${contact.email}">
+                            <div class="slds-box
                             slds-grid
                             slds-wrap
                             list-item
@@ -112,26 +112,27 @@
                             slds-medium-size--12-of-12
                             slds-small-size--12-of-12
                             slds-max-small-size--12-of-12">
-                            <div class="slds-large-size--1-of-12
+                                <div class="slds-large-size--1-of-12
                                 slds-medium-size--1-of-12
                                 slds-small-size--2-of-12
                                 slds-max-small-size--2-of-12">
-                                <i class="material-icons face-icon">face</i>
-                            </div>
-                            <div class="slds-grid slds-wrap slds-size--11-of-12">
-                                <div class="slds-size--1-of-2
+                                    <i class="material-icons face-icon">face</i>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-size--11-of-12">
+                                    <div class="slds-size--1-of-2
                                 slds-text-align_left">
-                                    <p class="slds-truncate">${contact.firstName} ${contact.lastName} (${contact.companyName})</p>
-                                </div>
-                                <div class="slds-size--1-of-2
+                                        <p class="slds-truncate">${contact.firstName} ${contact.lastName} (${contact.companyName})</p>
+                                    </div>
+                                    <div class="slds-size--1-of-2
                                 slds-text-align_right">
-                                    <p clas="slds-truncate">Value: 1000000 $</p>
-                                </div>
-                                <div class="slds-size--1-of-2">
-                                    <p class="slds-truncate">Newly Created</p>
+                                        <p clas="slds-truncate">Value: 1000000 $</p>
+                                    </div>
+                                    <div class="slds-size--1-of-2">
+                                        <p class="slds-truncate">Newly Created</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </c:forEach>
                 </div>
             </div>
