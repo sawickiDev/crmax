@@ -100,8 +100,8 @@
                             <p><%=emptyList%></p>
                         </div>
                     </c:if>
-                    <c:forEach var="contact" items="${contacts}">
-                        <a href="/client-detail-page?contact=${contact.email}">
+                    <c:forEach var="compoundContacts" items="${compoundContacts}">
+                        <a href="/client-detail-page?contact=${compoundContacts.contact.email}">
                             <div class="slds-box
                             slds-grid
                             slds-wrap
@@ -121,14 +121,14 @@
                                 <div class="slds-grid slds-wrap slds-size--11-of-12">
                                     <div class="slds-size--1-of-2
                                 slds-text-align_left">
-                                        <p class="slds-truncate">${contact.firstName} ${contact.lastName} (${contact.companyName})</p>
+                                        <p class="slds-truncate">${compoundContacts.contact.firstName} ${compoundContacts.contact.lastName} (${compoundContacts.contact.companyName})</p>
                                     </div>
                                     <div class="slds-size--1-of-2
                                 slds-text-align_right">
-                                        <p clas="slds-truncate">Value: 1000000 $</p>
+                                        <p clas="slds-truncate">Value: ${compoundContacts.value} $</p>
                                     </div>
                                     <div class="slds-size--1-of-2">
-                                        <p class="slds-truncate">Newly Created</p>
+                                        <p class="slds-truncate">${compoundContacts.stage}</p>
                                     </div>
                                 </div>
                             </div>

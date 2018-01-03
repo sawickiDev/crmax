@@ -9,6 +9,7 @@ public interface ProductService {
     String save(Product product);
     List<Product> findAllProducts();
     Boolean isDuplicate(Product product);
+    List<Product> findAllByIds(String ids);
 
     public enum InsertionStatus {
         WARNING,

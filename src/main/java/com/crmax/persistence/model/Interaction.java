@@ -32,12 +32,15 @@ public class Interaction {
     @ManyToOne
     private Contact contactId;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+    @ManyToMany(cascade = {CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "interactions_products_table",
-                joinColumns = {@JoinColumn(name = "interaction_id")},
-                inverseJoinColumns = {@JoinColumn(name = "id")})
+                joinColumns = {@JoinColumn(name = "interaction_junction_id")},
+                inverseJoinColumns = {@JoinColumn(name = "product_junction_id")})
     private List<Product> products = new ArrayList<>();
+
+    @Transient
+    private String productsSelected;
 
     public Interaction() {
     }
@@ -88,13 +91,29 @@ public class Interaction {
         this.contactId = contactId;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public String getProductsSelected() {
+        return productsSelected;
+    }
+
+    public void setProductsSelected(String productsSelected) {
+        this.productsSelected = productsSelected;
+    }
+
     @Override
     public String toString() {
         return "Interaction{" +
                 "id=" + id +
                 ", stage='" + stage + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", lastDate='" + endDate + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
                 ", contactId=" + contactId +
                 '}';
     }

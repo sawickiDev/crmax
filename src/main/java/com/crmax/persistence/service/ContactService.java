@@ -1,5 +1,6 @@
 package com.crmax.persistence.service;
 
+import com.crmax.persistence.model.CompoundContact;
 import com.crmax.persistence.model.Contact;
 import com.crmax.persistence.model.User;
 
@@ -12,6 +13,7 @@ public interface ContactService {
     List<Contact> findByEmailAndPhone(Contact contact);
     Contact findByEmail(String email);
     Boolean isDuplicate(Contact contact);
+    List<CompoundContact> createCompoundList(List<Contact> rawContacts);
 
     public enum InsertionStatus {
         WARNING,

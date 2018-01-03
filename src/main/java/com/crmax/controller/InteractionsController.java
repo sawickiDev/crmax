@@ -29,6 +29,9 @@ public class InteractionsController {
     @Autowired
     private ContactService contactService;
 
+    @Autowired
+    private ProductService productService;
+
     @GetMapping(value = "/client-detail-page")
     public String showProductsPage(@ModelAttribute("status") String status,
                                    Model model,
@@ -42,11 +45,15 @@ public class InteractionsController {
         List<String> stages =
                 interactionService.getStages();
 
+        List<Product> products =
+                productService.findAllProducts();
+
         System.out.println("Interactions : " + interactions);
 
         model.addAttribute("contact", selectedContact);
         model.addAttribute("interactions", interactions);
         model.addAttribute("stages", stages);
+        model.addAttribute("products", products);
 
         if(!model.containsAttribute("interaction")){
             model.addAttribute("interaction", new Interaction());
@@ -64,7 +71,12 @@ public class InteractionsController {
                                    RedirectAttributes redirectAttributes){
 
         System.out.println("Interaction : " + interaction);
+        System.out.println("Interaction : " + interaction.getProductsSelected());
         System.out.println("Interaction : " + contactEmail);
+
+        List<Product> selectedProducts = productService.findAllByIds(interaction.getProductsSelected());
+
+        interaction.setProducts(selectedProducts);
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("interaction", interaction);

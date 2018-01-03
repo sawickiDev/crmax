@@ -8,6 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -40,6 +42,18 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Boolean isDuplicate(Product product) {
         return productDao.findByProductCode(product.getProductCode()).size() > 0;
+    }
+
+    @Override
+    public List<Product> findAllByIds(String ids) {
+        List<String> idsList = new ArrayList<>(Arrays.asList(ids.split(",")));
+        List<Integer> integerIds = new ArrayList<>();
+
+        for(String id : idsList){
+            integerIds.add(Integer.valueOf(id));
+        }
+
+        return productDao.findByIdIsIn(integerIds);
     }
 
     private String resolveInsertionStatus(Product persistedProduct){

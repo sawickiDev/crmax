@@ -1,13 +1,17 @@
 package com.crmax.persistence.service;
 
 import com.crmax.persistence.dao.ContactDao;
-import com.crmax.persistence.model.Contact;
-import com.crmax.persistence.model.User;
+import com.crmax.persistence.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,6 +20,9 @@ public class ContactServiceImpl implements ContactService{
 
     @Autowired
     private ContactDao contactDao;
+
+    @Autowired
+    private InteractionService interactionService;
 
     @Autowired
     private UserService userService;
@@ -31,6 +38,17 @@ public class ContactServiceImpl implements ContactService{
         } catch(DataIntegrityViolationException dvex) {
             return InsertionStatus.ERROR.name();
         }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
+
+        Interaction interaction = new Interaction();
+        interaction.setStage(InteractionService.Stage.NEWLY_CREATED.valueString);
+        interaction.setStartDate(java.sql.Date.valueOf(LocalDate.now()));
+        interaction.setEndDate(java.sql.Date.valueOf(LocalDate.now()));
+
+        interactionService.save(interaction, persistedContact);
 
         return resolveInsertionStatus(persistedContact);
     }
@@ -70,5 +88,31 @@ public class ContactServiceImpl implements ContactService{
     public Boolean isDuplicate(Contact contact){
 
         return findByEmailAndPhone(contact).size() > 0;
+    }
+
+    @Override
+    public List<CompoundContact> createCompoundList(List<Contact> rawContacts) {
+        List<CompoundContact> compoundContacts =
+                new ArrayList<>();
+
+        for(Contact contact : rawContacts) {
+            List<Interaction> interactions = interactionService.findByContact(contact);
+            compoundContacts
+                    .add(new CompoundContact(contact, getValueOfInteractions(interactions), interactions.get(interactions.size()-1).getStage()));
+        }
+
+        return compoundContacts;
+    }
+
+    private String getValueOfInteractions(List<Interaction> interactions) {
+        Double overallPrice = 0.00;
+
+        for(Interaction interaction : interactions){
+            for(Product product : interaction.getProducts()) {
+                overallPrice += product.getPrice();
+            }
+        }
+
+        return String.valueOf(overallPrice);
     }
 }
