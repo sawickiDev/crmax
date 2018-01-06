@@ -40,6 +40,11 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    public List<Product> findAllActiveProducts() {
+        return productDao.findByActiveIsTrue();
+    }
+
+    @Override
     public Boolean isDuplicate(Product product) {
         return productDao.findByProductCode(product.getProductCode()).size() > 0;
     }
@@ -54,6 +59,17 @@ public class ProductServiceImpl implements ProductService{
         }
 
         return productDao.findByIdIsIn(integerIds);
+    }
+
+    @Override
+    public Product findById(String id) {
+        return productDao.findById(Integer.valueOf(id)).get();
+    }
+
+    @Override
+    public void removeProduct(Product product) {
+        product.setActive(false);
+        productDao.save(product);
     }
 
     private String resolveInsertionStatus(Product persistedProduct){

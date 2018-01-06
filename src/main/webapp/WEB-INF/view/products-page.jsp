@@ -3,17 +3,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ResourceBundle" %>
 <% ResourceBundle resource = ResourceBundle.getBundle("labels");
-    String create = resource.getString("create_form.create");
-    String cancel = resource.getString("create_form.cancel");
-    String firstName = resource.getString("create_form.first_name");
-    String lastName = resource.getString("create_form.last_name");
-    String email = resource.getString("create_form.email");
-    String phone = resource.getString("create_form.phone");
-    String companyName = resource.getString("create_form.company_name");
+    String add = resource.getString("products_page.add");
+    String back = resource.getString("products_page.back");
+    String productName = resource.getString("products_page.product_name");
+    String productCode = resource.getString("products_page.product_code");
+    String error = resource.getString("products_page.error");
+    String success = resource.getString("products_page.success");
+    String warning = resource.getString("products_page.warning");
     String dashboard = resource.getString("create_form.dashboard");
-    String success = resource.getString("create_form.success");
-    String warning = resource.getString("create_form.warning");
-    String error = resource.getString("create_form.error");%>
+    String price = resource.getString("products_page.price");%>
 <html>
 <head>
     <title>CRMax Dashboard</title>
@@ -50,21 +48,20 @@
 
     </div>
 
-    <div class="slds-grid slds-wrap">
-        <div class="slds-size--12-of-12">
+    <div class="slds-grid slds-wrap slds-align_absolute-center">
             <form:form action="${pageContext.request.contextPath}/save-product"
                        method="POST"
-                       cssStyle="margin:0;"
-                       modelAttribute="product">
-                <div class="slds-grid slds-wrap">
-                    <div class="slds-grid
+                       cssClass="slds-grid
                                 slds-wrap
                                 login-form
+                                slds-align_absolute-center
                                 slds-large-size--4-of-12
                                 slds-medium-size--4-of-12
                                 slds-small-size--12-of-12
                                 slds-max-small-size--12-of-12
-                                slds-p-around_large">
+                                slds-p-around_large
+                                slds-m-top_medium"
+                       modelAttribute="product">
                         <c:choose>
                             <c:when test="${status == 'SUCCESS'}">
                                 <div class="slds-box
@@ -96,7 +93,7 @@
                                     slds-small-size--12-of-12
                                     slds-max-small-size--12-of-12
                                     slds-m-bottom_x-small">
-                            <label class="cr-label" for="product-name-input">Product Name</label>
+                            <label class="cr-label" for="product-name-input"><%=productName%></label>
                             <form:input id="product-name-input"
                                         class="slds-input cr-input"
                                         type="text"
@@ -109,7 +106,7 @@
                                     slds-small-size--12-of-12
                                     slds-max-small-size--12-of-12
                                     slds-m-bottom_x-small">
-                            <label class="cr-label" for="product-code-input">Product Code</label>
+                            <label class="cr-label" for="product-code-input"><%=productCode%></label>
                             <form:input id="product-code-input"
                                         class="slds-input cr-input"
                                         type="text"
@@ -122,7 +119,7 @@
                                     slds-small-size--12-of-12
                                     slds-max-small-size--12-of-12
                                     slds-m-bottom_x-small">
-                            <label class="cr-label" for="price-input">Price</label>
+                            <label class="cr-label" for="price-input"><%=price%></label>
                             <form:input id="price-input"
                                         class="slds-input cr-input"
                                         type="text"
@@ -131,32 +128,57 @@
                             <form:errors path="price" cssClass="error-box-validation"/>
                         </div>
 
+                        <form:input type="hidden"
+                                    path="active"
+                                    value="true"
+                                    required="true"/>
 
                         <div class="slds-size--6-of-12
                                 slds-m-top_medium
                                 slds-p-around_x-small">
-                            <a href="/crmax-dashboard" class="slds-button neutral-button">Back</a>
+                            <a href="/crmax-dashboard" class="slds-button neutral-button"><%=back%></a>
                         </div>
                         <div class="slds-size--6-of-12
                                 slds-m-top_medium
                                 slds-p-around_x-small">
-                            <button type="submit" class="slds-button right-button">Create</button>
+                            <button type="submit" class="slds-button right-button"><%=add%></button>
                         </div>
-                    </div>
-                </div>
             </form:form>
-        </div>
 
         <div class="slds-size--12-of-12">
             <div class="slds-grid
                         slds-wrap
-                        login-form
-                        slds-align_absolute-center
                         slds-large-size--12-of-12
                         slds-medium-size--12-of-12
                         slds-small-size--12-of-12
                         slds-max-small-size--12-of-12
-                        slds-order--2">
+                        slds-order--2
+                        slds-p-around--small">
+                <div class="slds-size--12-of-12
+                            slds-text-align_center">
+                    <p class="header-text">Available Products</p>
+                </div>
+                <div class="slds-box
+                            list-item
+                            slds-align_absolute-center
+                            slds-grid
+                            slds-wrap
+                            slds-size--12-of-12"
+                     style="background-color: rgba(194, 199, 204, 0.48);">
+                    <div class="slds-size--1-of-4
+                                slds-text-align_left">
+                        <p class="slds-truncate"><%=productName%></p>
+                    </div>
+                    <div class="slds-size--1-of-4">
+                        <p clas="slds-truncate"><%=productCode%></p>
+                    </div>
+                    <div class="slds-size--1-of-4">
+                        <p class="slds-truncate"><%=price%></p>
+                    </div>
+                    <div class="slds-size--1-of-4">
+                        <p class="slds-truncate">Actions</p>
+                    </div>
+                </div>
                 <div class="
                         slds-large-size--12-of-12
                         slds-medium-size--12-of-12
@@ -164,7 +186,7 @@
                         slds-max-small-size--12-of-12
                         slds-scrollable_y
                         scrollable-pane"
-                        style="height:450px">
+                        style="height:200px">
 
                         <c:if test="${products.size() == 0}">
                             <div class="slds-size--6-of-12
@@ -183,15 +205,18 @@
                                         slds-grid
                                         slds-wrap
                                         slds-size--12-of-12">
-                                <div class="slds-size--1-of-3
+                                <div class="slds-size--1-of-4
                                 slds-text-align_left">
                                     <p class="slds-truncate">${product.productName}</p>
                                 </div>
-                                <div class="slds-size--1-of-3">
-                                    <p clas="slds-truncate">Product Code: ${product.productCode}</p>
+                                <div class="slds-size--1-of-4">
+                                    <p clas="slds-truncate">${product.productCode}</p>
                                 </div>
-                                <div class="slds-size--1-of-3">
-                                    <p class="slds-truncate">Price: ${product.price}$</p>
+                                <div class="slds-size--1-of-4">
+                                    <p class="slds-truncate">${product.price}$</p>
+                                </div>
+                                <div class="slds-size--1-of-4">
+                                    <a href="/remove-product?productId=${product.id}">Remove</a>
                                 </div>
                             </div>
                         </c:forEach>

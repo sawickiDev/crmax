@@ -30,6 +30,9 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "active")
+    private Boolean active;
+
     @ManyToMany(mappedBy = "products")
     private List<Interaction> interactions = new ArrayList<>();
 
@@ -74,12 +77,21 @@ public class Product {
         this.price = price;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", productName='" + productName + '\'' +
                 ", productCode='" + productCode + '\'' +
+                ", active='" + active + '\'' +
                 ", price=" + price +
                 '}';
     }

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -28,9 +29,7 @@ public class ProductsController {
                                    Model model){
 
         List<Product> products =
-                productService.findAllProducts();
-
-        System.out.println("Products : " + products);
+                productService.findAllActiveProducts();
 
         model.addAttribute("products", products);
 
@@ -41,6 +40,17 @@ public class ProductsController {
         model.addAttribute("status", status);
 
         return "products-page";
+    }
+
+    @GetMapping(value = "/remove-product")
+    public String deleteProduct(@RequestParam(value = "productId", required = true) String productId){
+
+        Product product = productService.findById(productId);
+
+        productService.removeProduct(product);
+
+        return "redirect:/products-page";
+
     }
 
     @PostMapping(value = "/save-product")

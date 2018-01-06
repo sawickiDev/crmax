@@ -107,7 +107,7 @@
                             slds-wrap
                             list-item
                             slds-align_absolute-center
-                            slds-m-top_medium
+                            slds-m-top_small
                             slds-large-size--12-of-12
                             slds-medium-size--12-of-12
                             slds-small-size--12-of-12

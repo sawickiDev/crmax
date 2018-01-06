@@ -11,4 +11,5 @@ public interface ProductDao extends CrudRepository<Product, Integer> {
     List<Product> findAll();
     List<Product> findByProductCode(String productCode);
     List<Product> findByIdIsIn(List<Integer> Id);
+    List<Product> findByActiveIsTrue();
 }

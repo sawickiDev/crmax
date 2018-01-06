@@ -1,9 +1,16 @@
 .list-item {
-    background-color: rgba(116, 187, 249, 0.48);
-    color: #16325c;
+    background-color: rgba(155, 159, 162, 0.48);
+    color: #162335;
     font-family: Ubuntu;
-    border-color: #1589ee;
+    border-color: #5e6871;
     font-size: 16px;
-    padding: 10px;
+    padding: 4px 4px 4px 8px;
     border-radius: 0;
+}
+
+.header-text {
+    font-family: Ubuntu;
+    font-size: 24px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
