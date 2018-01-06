@@ -41,7 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/resources/img/crmax-background.jpeg",
                          "/resources/css/login-style.css",
                          "/resources/css/style-guide.css",
-                         "/webjars/**")
+                         "/webjars/**",
+                         "/crmax-register",
+                         "/register-user")
             .permitAll();
 
         http

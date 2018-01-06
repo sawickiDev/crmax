@@ -67,7 +67,7 @@
                                 slds-max-small-size--12-of-12
                                 slds-m-top_medium
                                 slds-p-around_x-small">
-                        <button type="button" class="slds-button left-button">Sign up</button>
+                        <a href="/crmax-register" class="slds-button left-button">Sign up</a>
                     </div>
                     <div class="slds-large-size--6-of-12
                                 slds-medium-size--6-of-12

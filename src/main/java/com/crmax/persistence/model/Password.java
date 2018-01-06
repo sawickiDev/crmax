@@ -1,5 +1,7 @@
 package com.crmax.persistence.model;
 
+import org.hibernate.annotations.ColumnTransformer;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Password {
     private int id;
 
     @Column(name = "password")
+    @ColumnTransformer(write = "crypt(?, gen_salt('bf', 10))")
     private String password;
 
     public Password() {

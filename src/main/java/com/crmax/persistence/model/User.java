@@ -1,10 +1,14 @@
 package com.crmax.persistence.model;
 
+import com.crmax.persistence.validation.PasswordNotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,22 +22,31 @@ public class User implements UserDetails{
     @Column(name = "id")
     private Integer id;
 
+    @NotEmpty(message = "First Name is required")
+    @Size(max = 30, message = "First Name is too long")
     @Column(name = "first_name")
     private String firstName;
 
+    @NotEmpty(message = "First Name is required")
+    @Size(max = 30, message = "First Name is too long")
     @Column(name = "last_name")
     private String lastName;
 
+    @NotEmpty(message = "Email is required")
+    @Email(message = "Provide Email in valid format")
     @Column(name = "email")
     private String email;
 
+    @NotEmpty(message = "Username is required")
+    @Size(max = 30, message = "Username is too long")
     @Column(name = "username")
     private String username;
 
+    @Size(max = 20, message = "Phone is too long")
     @Column(name = "phone")
     private String phoneNumber;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+    @ManyToOne(cascade = {CascadeType.MERGE,
                             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "supervisor_id")
     private User supervisor;
@@ -44,14 +57,18 @@ public class User implements UserDetails{
                 fetch = FetchType.EAGER)
     private List<User> subordinates;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+    @OneToOne(cascade = {CascadeType.MERGE,
                 CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "role_id")
     private Role roleId;
 
+    @PasswordNotEmpty(message = "Password is required")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "password_id")
     private Password passwordId;
+
+    @Transient
+    private String supervisorCache;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
                 CascadeType.DETACH, CascadeType.REFRESH},
@@ -72,11 +89,11 @@ public class User implements UserDetails{
         this.passwordId = passwordId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -162,6 +179,14 @@ public class User implements UserDetails{
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    public String getSupervisorCache() {
+        return supervisorCache;
+    }
+
+    public void setSupervisorCache(String supervisorCache) {
+        this.supervisorCache = supervisorCache;
     }
 
     public void addAdminUser(User subordinate) {
