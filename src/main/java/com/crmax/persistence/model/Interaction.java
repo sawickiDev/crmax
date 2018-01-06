@@ -1,5 +1,8 @@
 package com.crmax.persistence.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -34,6 +37,7 @@ public class Interaction {
 
     @ManyToMany(cascade = {CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "interactions_products_table",
                 joinColumns = {@JoinColumn(name = "interaction_junction_id")},
                 inverseJoinColumns = {@JoinColumn(name = "product_junction_id")})
@@ -114,7 +118,7 @@ public class Interaction {
                 ", stage='" + stage + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", contactId=" + contactId +
+                ", products=" + products +
                 '}';
     }
 }

@@ -43,8 +43,7 @@ public class Contact {
     @ManyToOne
     private User ownerId;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                CascadeType.DETACH, CascadeType.REFRESH},
+    @OneToMany(cascade = CascadeType.ALL,
                 mappedBy = "contactId")
     private List<Interaction> interactions;
 

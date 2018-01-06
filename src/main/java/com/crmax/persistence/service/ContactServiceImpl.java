@@ -104,6 +104,30 @@ public class ContactServiceImpl implements ContactService{
         return compoundContacts;
     }
 
+    @Override
+    public String updateContact(Contact oldContact, Contact newContact) {
+        try{
+            oldContact.setFirstName(newContact.getFirstName());
+            oldContact.setLastName(newContact.getLastName());
+            oldContact.setEmail(newContact.getEmail());
+            oldContact.setPhone(newContact.getPhone());
+            oldContact.setCompanyName(newContact.getCompanyName());
+
+            contactDao.save(oldContact);
+        } catch(DataIntegrityViolationException dvex) {
+            return InsertionStatus.ERROR.name();
+        }
+
+        return InsertionStatus.SUCCESS.name();
+    }
+
+    @Override
+    @Transactional
+    public void deleteContact(Contact contact) {
+        System.out.println("DELETE : " + contact);
+        contactDao.deleteById(Integer.valueOf(contact.getId()));
+    }
+
     private String getValueOfInteractions(List<Interaction> interactions) {
         Double overallPrice = 0.00;
 

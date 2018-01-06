@@ -7,6 +7,8 @@ import com.crmax.persistence.service.ContactService;
 import com.crmax.persistence.service.InteractionService;
 import com.crmax.persistence.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,10 +34,15 @@ public class InteractionsController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private Environment env;
+
     @GetMapping(value = "/client-detail-page")
     public String showProductsPage(@ModelAttribute("status") String status,
+                                   @ModelAttribute("errorMessage") String errorMessage,
+                                   @ModelAttribute("successMessage") String successMessage,
                                    Model model,
-                                   @RequestParam(value = "contact", required = false) String contactEmail){
+                                   @RequestParam(value = "contact", required = true) String contactEmail){
 
         Contact selectedContact = contactService.findByEmail(contactEmail);
 
@@ -46,9 +53,8 @@ public class InteractionsController {
                 interactionService.getStages();
 
         List<Product> products =
-                productService.findAllProducts();
+                productService.findAllActiveProducts();
 
-        System.out.println("Interactions : " + interactions);
 
         model.addAttribute("contact", selectedContact);
         model.addAttribute("interactions", interactions);
@@ -59,7 +65,10 @@ public class InteractionsController {
             model.addAttribute("interaction", new Interaction());
         }
 
+        model.addAttribute("client", selectedContact);
         model.addAttribute("status", status);
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("successMessage", successMessage);
 
         return "client-detail";
     }
@@ -74,9 +83,11 @@ public class InteractionsController {
         System.out.println("Interaction : " + interaction.getProductsSelected());
         System.out.println("Interaction : " + contactEmail);
 
-        List<Product> selectedProducts = productService.findAllByIds(interaction.getProductsSelected());
+        if(interaction.getProductsSelected() != null){
+            List<Product> selectedProducts = productService.findAllByIds(interaction.getProductsSelected());
 
-        interaction.setProducts(selectedProducts);
+            interaction.setProducts(selectedProducts);
+        }
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("interaction", interaction);
@@ -85,11 +96,18 @@ public class InteractionsController {
         }
 
         Contact selectedContact = contactService.findByEmail(contactEmail);
-        redirectAttributes.addFlashAttribute("status", interactionService.save(interaction, selectedContact));
+
+        String status = interactionService.save(interaction, selectedContact);
+
+        redirectAttributes.addFlashAttribute("status", status);
         redirectAttributes.addAttribute("contact", contactEmail);
+
+        if(status == "ERROR")
+            redirectAttributes.addFlashAttribute("errorMessage", env.getProperty("client_detail.error"));
+        else
+            redirectAttributes.addFlashAttribute("successMessage", env.getProperty("client_detail.success"));
 
         return new RedirectView("client-detail-page");
     }
-
 
 }

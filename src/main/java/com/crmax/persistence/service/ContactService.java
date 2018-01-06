@@ -14,6 +14,8 @@ public interface ContactService {
     Contact findByEmail(String email);
     Boolean isDuplicate(Contact contact);
     List<CompoundContact> createCompoundList(List<Contact> rawContacts);
+    String updateContact(Contact oldContact, Contact newContact);
+    void deleteContact(Contact contact);
 
     public enum InsertionStatus {
         WARNING,
