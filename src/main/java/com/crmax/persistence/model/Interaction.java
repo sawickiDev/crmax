@@ -17,7 +17,7 @@ public class Interaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "interaction_id")
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "stage")

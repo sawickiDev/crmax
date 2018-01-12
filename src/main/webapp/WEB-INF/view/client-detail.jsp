@@ -189,7 +189,7 @@
                                  size="4">
                         <c:forEach var="product" items="${products}" varStatus="loop">
                             <form:option
-                                    value="${product.id}">${product.productCode}</form:option>
+                                    value="${product.id}">${product.productCode} (${product.price})$</form:option>
                         </c:forEach>
                     </form:select>
                     <form:errors path="stage" cssClass="error-box-validation"/>

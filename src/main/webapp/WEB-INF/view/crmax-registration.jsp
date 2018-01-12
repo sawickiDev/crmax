@@ -139,7 +139,7 @@
                     <label class="cr-label" for="password-input"><%=password%></label>
                     <form:input id="password-input"
                                 class="slds-input cr-input"
-                                type="text"
+                                type="password"
                                 path="passwordId"/>
                     <form:errors path="passwordId" cssClass="error-box-validation"/>
                 </div>
